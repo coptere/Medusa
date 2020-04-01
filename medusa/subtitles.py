@@ -520,7 +520,8 @@ def get_provider_pool():
     """
     logger.debug(u'Creating a new ProviderPool instance')
     provider_configs = {'addic7ed': {'username': app.ADDIC7ED_USER,
-                                     'password': app.ADDIC7ED_PASS},
+                                     'password': app.ADDIC7ED_PASS,
+                                     'anonymous': app.ADDIC7ED_ANONYMOUS},
                         'legendastv': {'username': app.LEGENDASTV_USER,
                                        'password': app.LEGENDASTV_PASS},
                         'opensubtitles': {'username': app.OPENSUBTITLES_USER,
