@@ -20,6 +20,7 @@ language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7ed
 
 # Series cell matching regex
 show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
+show_option_re = re.compile(b'<select name="qsShow" onchange="showChange\(0\);" id="qsShow">.*?</select>', re.DOTALL)
 
 #: Series header parsing regex
 series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),*&!?-]+?)(?: \((?P<year>\d{4})\))?$')
@@ -81,24 +82,26 @@ class Addic7edProvider(Provider):
         'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha', 'tur', 'ukr', 'vie', 'zho'
     ]}
     video_types = (Episode,)
-    server_url = 'http://www.addic7ed.com/'
+    server_url = 'https://www.addic7ed.com/'
     subtitle_class = Addic7edSubtitle
 
-    def __init__(self, username=None, password=None):
-        if any((username, password)) and not all((username, password)):
-            raise ConfigurationError('Username and password must be specified')
+    def __init__(self, username=None, password=None, anonymous=None):
+        if any((username, password, anonymous)):
+            if not anonymous and not all((username, password)):
+                raise ConfigurationError('Username and password must be specified')
 
         self.username = username
         self.password = password
+        self.anonymous = anonymous
         self.logged_in = False
         self.session = None
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = self.user_agent
+        self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.3'
 
         # login
-        if self.username and self.password:
+        if self.username and self.password and not self.anonymous:
             logger.info('Logging in')
             data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
             r = self.session.post(self.server_url + 'dologin.php', data, allow_redirects=False, timeout=10)
@@ -130,13 +133,13 @@ class Addic7edProvider(Provider):
         """
         # get the show page
         logger.info('Getting show ids')
-        r = self.session.get(self.server_url + 'shows.php', timeout=10)
+        r = self.session.get(self.server_url if self.anonymous else 'shows.php', timeout=10)
         r.raise_for_status()
 
         # LXML parser seems to fail when parsing Addic7ed.com HTML markup.
         # Last known version to work properly is 3.6.4 (next version, 3.7.0, fails)
         # Assuming the site's markup is bad, and stripping it down to only contain what's needed.
-        show_cells = re.findall(show_cells_re, r.content)
+        show_cells = re.findall(show_option_re if self.anonymous else show_cells_re, r.content)
         if show_cells:
             soup = ParserBeautifulSoup(b''.join(show_cells), ['lxml', 'html.parser'])
         else:
@@ -145,8 +148,8 @@ class Addic7edProvider(Provider):
 
         # populate the show ids
         show_ids = {}
-        for show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[sanitize(show.text)] = int(show['href'][6:])
+        for show in soup.select('option' if self.anonymous else 'td.version > h3 > a[href^="/show/"]'):
+            show_ids[sanitize(show.text)] = int(show['value'] if self.anonymous else show['href'][6:])
         logger.debug('Found %d show ids', len(show_ids))
 
         return show_ids
@@ -252,7 +255,7 @@ class Addic7edProvider(Provider):
 
             # ignore incomplete subtitles
             status = cells[5].text
-            if status != 'Completed':
+            if status not in {'Completed', 'Terminé'}:
                 logger.debug('Ignoring subtitle with status %s', status)
                 continue
 
