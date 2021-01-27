@@ -109,6 +109,7 @@
     font-weight: 400;
     line-height: 1.42857143;
     white-space: nowrap;
+<<<<<<< HEAD
 }
 
 .vgt-table-styling >>> .align-center {
@@ -197,4 +198,6 @@
 
 .show-history {
     margin-bottom: 10px;
+=======
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 }

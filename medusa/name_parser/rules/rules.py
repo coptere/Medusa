@@ -1044,7 +1044,11 @@ class AbsoluteEpisodeWithX26Y(Rule):
         to_append = []
 
         # if it seems to be anime and it doesn't have a season
+<<<<<<< HEAD
         if context.get('show_type') != 'anime' or not matches.named('season') or matches.named('episode'):
+=======
+        if context.get('show_type') == 'normal' or not matches.named('season') or matches.named('episode'):
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
             return
 
         if not matches.tagged('SxxExx'):

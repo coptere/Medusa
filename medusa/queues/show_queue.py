@@ -440,7 +440,11 @@ class QueueItemAdd(ShowQueueItem):
                 series.load_episodes_from_indexer(tvapi=api)
                 # If we provide a default_status_after through the apiv2 series route options object.
                 # set it after we've added the episodes.
+<<<<<<< HEAD
                 series.default_ep_status = self.options['default_status_after'] or app.STATUS_DEFAULT_AFTER
+=======
+                self.default_ep_status = self.options['default_status_after'] or app.STATUS_DEFAULT_AFTER
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 
             except IndexerException as error:
                 log.warning('Unable to load series episodes from indexer: {0!r}'.format(error))

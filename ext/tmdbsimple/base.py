@@ -12,7 +12,6 @@ Created by Celia Oakley on 2013-10-31.
 """
 
 import json
-import requests
 
 
 class APIKeyError(Exception):
@@ -81,6 +80,7 @@ class TMDB(object):
         url = self._get_complete_url(path)
         params = self._get_params(params)
 
+<<<<<<< HEAD
         # Create a new request session if no global session is defined
         if self.session is None:
             response = requests.request(
@@ -100,6 +100,12 @@ class TMDB(object):
                 data=json.dumps(payload) if payload else payload,
                 headers=self.headers,
             )
+=======
+        response = self.session.request(
+            method, url, params=params,
+            data=json.dumps(payload) if payload else payload,
+            headers=self.headers)
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 
         response.raise_for_status()
         response.encoding = 'utf-8'

@@ -133,8 +133,16 @@ class TraktPopular(object):
             for show in shows:
                 try:
                     # If there isn't a tvdb id available skip it. We can't add it anyway.
+<<<<<<< HEAD
                     if show.tvdb is None:
                         continue
+=======
+                    if show['show']['ids']['tvdb'] is None:
+                        continue
+
+                    if 'show' not in show:
+                        show['show'] = show
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 
                     if (not_liked_show and show.tvdb
                             in (s.tvdb for s in not_liked_show if s.media_type == 'shows')):

@@ -4493,8 +4493,12 @@
   type: episode
 
 ? "[Raze].Jujutsu.Kaisen-09.x265.10bit.1080p.60fps"
+<<<<<<< HEAD
 : options: {show_type: anime}
   title: Jujutsu Kaisen
+=======
+: title: Jujutsu Kaisen
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
   episode: 9
   absolute_episode: 9
   release_group: Raze
@@ -4506,8 +4510,12 @@
   type: episode
 
 ? "[QCE]Jujutsu.Kaisen.10.x264.AAC.720p"
+<<<<<<< HEAD
 : options: {show_type: anime}
   title: Jujutsu Kaisen
+=======
+: title: Jujutsu Kaisen
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
   episode: 10
   absolute_episode: 10
   release_group: QCE

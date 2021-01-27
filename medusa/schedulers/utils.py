@@ -20,7 +20,10 @@ all_schedulers = [
     ('traktChecker', 'Trakt Checker', 'trakt_checker_scheduler'),
     ('torrentChecker', 'Torrent Checker', 'torrent_checker_scheduler'),
     ('snatchQueue', 'Snatch Queue', 'manual_snatch_scheduler'),
+<<<<<<< HEAD
     ('episodeUpdater', 'Episode Updater', 'episode_update_scheduler'),
+=======
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 ]
 
 

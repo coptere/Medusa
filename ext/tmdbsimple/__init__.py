@@ -17,7 +17,11 @@ https://www.themoviedb.org/documentation/api/status-codes
 """
 
 __title__ = 'tmdbsimple'
+<<<<<<< HEAD
 __version__ = '2.8.0'
+=======
+__version__ = '2.7.0'
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 __author__ = 'Celia Oakley'
 __copyright__ = 'Copyright (c) 2013-2020 Celia Oakley'
 __license__ = 'GPLv3'
@@ -52,4 +56,8 @@ __all__ = ['Account', 'Authentication', 'GuestSessions', 'Lists',
 
 API_KEY = os.environ.get('TMDB_API_KEY', None)
 API_VERSION = '3'
+<<<<<<< HEAD
 REQUESTS_SESSION = None
+=======
+REQUESTS_SESSION = requests.Session()
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method

@@ -89,8 +89,13 @@
  */
 
 /*!
+<<<<<<< HEAD
  * vuex v3.6.2
  * (c) 2021 Evan You
+=======
+ * vuex v3.6.0
+ * (c) 2020 Evan You
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
  * @license MIT
  */
 

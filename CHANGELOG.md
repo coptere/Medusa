@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## 0.5.6 (27-01-2021)
 
 #### Fixes
@@ -47,6 +48,8 @@
 
 -----
 
+=======
+>>>>>>> refs/remotes/origin/feature/addic7ed-alternative-method
 ## 0.5.1 (16-12-2020)
 
 #### Improvements
